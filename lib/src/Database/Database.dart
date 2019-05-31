@@ -41,7 +41,7 @@ static Database _database;
   }
 
 
-  newClient(StudyCard newStudyCard) async {
+  newCard(StudyCard newStudyCard) async {
     final db = await database;
     //get the biggest id in the table
     var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Cards");
@@ -54,9 +54,9 @@ static Database _database;
     return raw;
   }
 
-  Future<List<StudyCard>> getAllClients() async {
+  Future<List<StudyCard>> getCardStack() async {
     final db = await database;
-    var res = await db.query("Cards",where: "card_deck == Database Deck");
+    var res = await db.query("Cards",where: "card_deck == 'Database Deck'");
     List<StudyCard> list =
         res.isNotEmpty ? res.map((c) => StudyCard.fromJSON(c)).toList() : [];
     return list;
